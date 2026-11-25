@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Voltix — Material eletrónico</title>
+<style>
+:root{--bg:#fbfbfd;--fg:#1d1d1f;--mut:#6e6e73;--card:#f5f5f7;--line:#d2d2d7;--acc:#0071e3;--nav:rgba(251,251,253,.8);--pan:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--fg:#f5f5f7;--mut:#a1a1a6;--card:#161617;--line:#2d2d30;--acc:#2997ff;--nav:rgba(0,0,0,.8);--pan:#1c1c1e}}
+:root[data-theme="dark"]{--bg:#000;--fg:#f5f5f7;--mut:#a1a1a6;--card:#161617;--line:#2d2d30;--acc:#2997ff;--nav:rgba(0,0,0,.8);--pan:#1c1c1e}
+html{scroll-behavior:smooth;scroll-padding-top:calc(60px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:30}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;height:52px;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+nav div{max-width:1080px;height:100%;margin:auto;padding:0 20px;display:flex;align-items:center;gap:28px;font-size:13px}
+nav .logo{font-weight:600;font-size:17px;letter-spacing:-.02em;margin-right:auto}
+nav a{opacity:.8}nav a:hover{opacity:1}
+.cart{display:flex;gap:7px;align-items:center;font-size:13px}
+.cart b{min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--acc);color:#fff;font-size:11px;display:grid;place-items:center;transition:transform .3s}
+.cart b.pop{transform:scale(1.5)}
+@media(max-width:640px){nav .hide{display:none}nav div{gap:18px}}
+/* hero com fotografias */
+.hero{position:relative;height:min(86vh,760px);min-height:560px;background:#000;color:#f5f5f7;overflow:hidden;text-align:center}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease;pointer-events:none;background:radial-gradient(circle at 50% 80%,var(--g),#000 70%)}
+.slide.on{opacity:1;pointer-events:auto}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+.slide.on img{animation:kb 7s ease-out forwards}
+@keyframes kb{to{transform:scale(1.2) translate(-1.5%,-1%)}}
+.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.2) 55%,rgba(0,0,0,.65))}
+.txt{position:absolute;inset:0;z-index:2;padding-top:72px}
+.txt h1{font-size:clamp(34px,6.4vw,68px);line-height:1.05;letter-spacing:-.03em;font-weight:700;transform:translateY(18px);opacity:0;transition:all 1.1s .3s}
+.txt p{font-size:clamp(17px,2.4vw,24px);margin-top:10px;color:#d2d2d7;opacity:0;transition:opacity 1.1s .5s}
+.txt a{display:inline-block;margin-top:18px;padding:10px 24px;border-radius:980px;background:var(--acc);color:#fff;font-size:17px;opacity:0;transition:opacity 1.1s .7s}
+.slide.on .txt h1{transform:none;opacity:1}.slide.on .txt p,.slide.on .txt a{opacity:1}
+.dots{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:3}
+.dots button{width:44px;height:6px;padding:0;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden;position:relative}
+.dots button i{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(0)}
+.dots button.on i{animation:fill 5s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.strip{max-width:1080px;margin:0 auto;padding:56px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.strip h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.strip p{color:var(--mut);font-size:15px;margin-top:4px}
+.sec{max-width:1080px;margin:0 auto;padding:40px 20px 72px}
+.sec h2{font-size:clamp(30px,5vw,48px);line-height:1.08;letter-spacing:-.03em;font-weight:700}
+.sec>p{color:var(--mut);margin-top:8px;max-width:520px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0}
+.chips button{padding:8px 16px;border-radius:980px;background:var(--card);font-size:14px;transition:background .2s,color .2s}
+.chips button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.card.in{opacity:1;transform:none}
+.tile{height:230px;overflow:hidden;position:relative;background:#222;display:grid;place-items:center}
+.tile img{position:absolute;inset:-6%;width:112%;height:112%;object-fit:cover;transition:transform .35s ease-out}
+.tile{background:radial-gradient(circle at 50% 60%,#3a3a3f,#18181a 75%)}.tile svg{display:none;width:170px;height:170px;filter:drop-shadow(0 14px 18px rgba(0,0,0,.4));animation:fl 5s ease-in-out infinite}
+.slide svg.fb{display:none;position:absolute;left:50%;bottom:9%;width:min(62vw,340px);height:min(62vw,340px);margin-left:calc(min(62vw,340px)/-2);z-index:1;animation:fl 6s ease-in-out infinite;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+@keyframes fl{50%{transform:translateY(-14px) rotate(-2deg)}}
+.info{padding:16px 22px 22px;display:flex;flex-direction:column;gap:2px;flex:1}
+.info small{color:var(--mut);font-size:13px}
+.info h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:16px}
+.buy{background:var(--acc);color:#fff;padding:7px 16px;border-radius:980px;font-size:14px;transition:filter .2s,transform .15s}
+.buy:hover{filter:brightness(1.12)}.buy:active{transform:scale(.94)}
+.band{background:#000;color:#f5f5f7;text-align:center;padding:90px 20px;position:relative;overflow:hidden}
+.band h2{position:relative;font-size:clamp(32px,6vw,60px);letter-spacing:-.03em;line-height:1.06;font-weight:700}
+.band p{position:relative;color:#a1a1a6;margin:12px auto 0;max-width:460px}
+.band svg{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.band path{fill:none;stroke:#2997ff;stroke-width:2;stroke-dasharray:60 340;animation:run 5s linear infinite}
+.band path:nth-child(2){stroke:#30d158;animation-duration:7s;animation-delay:-2s}
+.band path:nth-child(3){stroke:#ff9f0a;animation-duration:6s;animation-delay:-4s}
+@keyframes run{to{stroke-dashoffset:-400}}
+footer{max-width:1080px;margin:0 auto;padding:36px 20px 56px;color:var(--mut);font-size:13px;display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between}
+/* carrinho */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:50}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--pan);z-index:51;transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:-20px 0 60px rgba(0,0,0,.25)}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.dh h2{font-size:21px;letter-spacing:-.02em}
+.dh button{font-size:22px;width:36px;height:36px;border-radius:50%;background:var(--card)}
+.db{flex:1;overflow:auto;padding:8px 22px}
+.it{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.it img{width:64px;height:64px;border-radius:12px;object-fit:cover;background:#222}
+.it h4{font-size:15px;font-weight:600;line-height:1.25}
+.it small{color:var(--mut);font-size:13px}
+.q{display:inline-flex;align-items:center;gap:10px;margin-top:6px;background:var(--card);border-radius:980px;padding:2px 4px}
+.q button{width:26px;height:26px;border-radius:50%;font-size:17px;line-height:1}
+.q button:hover{background:var(--line)}
+.rm{color:var(--mut);font-size:13px;text-decoration:underline}
+.empty{text-align:center;color:var(--mut);padding:70px 10px}
+.df{padding:18px 22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.tot{display:flex;justify-content:space-between;font-size:19px;font-weight:600}
+.pri{background:var(--acc);color:#fff;padding:13px;border-radius:14px;font-size:16px;font-weight:500;text-align:center}
+.pri:disabled{opacity:.4;cursor:not-allowed}
+.sec2{background:var(--card);padding:12px;border-radius:14px;font-size:15px}
+.f{display:flex;flex-direction:column;gap:12px;padding:18px 22px;overflow:auto;flex:1}
+.f label{font-size:13px;color:var(--mut);display:flex;flex-direction:column;gap:5px}
+.f input,.f select{padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);font-size:16px}
+.ok{text-align:center;padding:50px 24px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.ok i{width:64px;height:64px;border-radius:50%;background:#30d158;color:#fff;font-size:34px;font-style:normal;display:grid;place-items:center;animation:pp .5s}
+@keyframes pp{from{transform:scale(0)}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--fg);color:var(--bg);padding:12px 20px;border-radius:980px;font-size:14px;opacity:0;transition:.35s;z-index:60;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}.txt h1,.txt p,.txt a{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="s-Placas" viewBox="0 0 200 200"><rect x="14" y="44" width="172" height="112" rx="14" fill="#0b8a63"/><rect x="14" y="44" width="172" height="112" rx="14" fill="none" stroke="#12b886" stroke-width="2"/><path d="M34 56H166M34 144H166" stroke="#d9b44a" stroke-width="8" stroke-dasharray="6 6"/><rect x="72" y="76" width="56" height="48" rx="5" fill="#1d1d1f"/><circle cx="82" cy="86" r="3" fill="#8e8e93"/><rect x="0" y="72" width="34" height="38" rx="4" fill="#c7c7cc"/><circle cx="150" cy="104" r="5" fill="#ffd60a"/><circle cx="164" cy="104" r="5" fill="#30d158"/></symbol>
+<symbol id="s-Medição" viewBox="0 0 200 200"><rect x="52" y="8" width="96" height="184" rx="18" fill="#ffc400"/><rect x="64" y="22" width="72" height="40" rx="6" fill="#16291f"/><text x="130" y="53" text-anchor="end" font-size="26" font-family="monospace" fill="#7dffb2">12.46</text><circle cx="100" cy="115" r="30" fill="#1d1d1f"/><path d="M100 115L112 98" stroke="#ffc400" stroke-width="5" stroke-linecap="round"/><circle cx="72" cy="168" r="7" fill="#1d1d1f"/><circle cx="100" cy="168" r="7" fill="#1d1d1f"/><circle cx="128" cy="168" r="7" fill="#ff3b30"/></symbol>
+<symbol id="s-Componentes" viewBox="0 0 200 200"><rect x="50" y="50" width="100" height="100" rx="10" fill="#1d1d1f"/><rect x="50" y="50" width="100" height="100" rx="10" fill="none" stroke="#48484a" stroke-width="2"/><path d="M30 70H50M30 100H50M30 130H50M150 70H170M150 100H170M150 130H170M70 30V50M100 30V50M130 30V50M70 150V170M100 150V170M130 150V170" stroke="#c7c7cc" stroke-width="7"/><circle cx="66" cy="66" r="5" fill="#8e8e93"/><text x="100" y="108" text-anchor="middle" font-size="24" font-weight="700" fill="#e5e5ea" font-family="monospace">IC</text></symbol>
+</defs></svg>
+
+<nav><div><a class="logo" href="#top">Voltix</a><a class="hide" href="#produtos">Produtos</a><a class="hide" href="#contacto">Contacto</a><button class="cart" id="open" aria-label="Abrir carrinho">Carrinho <b id="count">0</b></button></div></nav>
+
+<header class="hero" id="top">
+<section class="slide on" style="--g:#0b8a63"><img src="https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=1800&q=80" alt="Placa de circuito eletrónico" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 200 200" aria-hidden="true"><use href="#s-Placas"/></svg><div class="txt"><h1>Placas que dão vida<br>às suas ideias.</h1><p>Placas de desenvolvimento a partir de 18 500 Kz.</p><a href="#produtos">Comprar</a></div></section>
+<section class="slide" style="--g:#a37a00"><img src="https://images.unsplash.com/photo-1564942513760-da4dc8da3d47?auto=format&fit=crop&w=1800&q=80" alt="Multímetro" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 200 200" aria-hidden="true"><use href="#s-Medição"/></svg><div class="txt"><h1>Medir com precisão.<br>Sem complicações.</h1><p>Multímetros e pinças amperimétricas testados antes do envio.</p><a href="#produtos">Comprar</a></div></section>
+<section class="slide" style="--g:#0a4a9a"><img src="https://images.unsplash.com/photo-1577962144759-8dec6b55c952?auto=format&fit=crop&w=1800&q=80" alt="Componentes eletrónicos numa mesa" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 200 200" aria-hidden="true"><use href="#s-Componentes"/></svg><div class="txt"><h1>Todas as peças.<br>Um só lugar.</h1><p>Kits de componentes para montar, reparar e aprender.</p><a href="#produtos">Comprar</a></div></section>
+<section class="slide" style="--g:#5a2a8a"><img src="https://images.unsplash.com/photo-1559819614-81fea9efd090?auto=format&fit=crop&w=1800&q=80" alt="Placa de circuito azul" referrerpolicy="no-referrer"><svg class="fb" viewBox="0 0 200 200" aria-hidden="true"><use href="#s-Placas"/></svg><div class="txt"><h1>Do protótipo<br>ao produto final.</h1><p>Módulos e placas prontos a programar.</p><a href="#produtos">Comprar</a></div></section>
+<div class="dots" id="dots"></div>
+</header>
+
+<div class="strip">
+<div><h3>Entrega em Luanda</h3><p>Receba em 24 horas nos principais bairros.</p></div>
+<div><h3>Garantia de 12 meses</h3><p>Todos os produtos testados antes do envio.</p></div>
+<div><h3>Multicaixa Express</h3><p>Pague com referência, TPA ou na entrega.</p></div>
+</div>
+
+<main class="sec" id="produtos">
+<h2>Tudo para montar,<br>medir e reparar.</h2>
+<p>Componentes, placas e instrumentos escolhidos por quem trabalha com eletrónica todos os dias.</p>
+<div class="chips" id="chips" role="group" aria-label="Filtrar por categoria"></div>
+<div class="grid" id="grid"></div>
+</main>
+
+<section class="band">
+<svg viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80H220L260 120H520L560 80H800"/><path d="M0 320H180L230 270H600L650 320H800"/><path d="M0 200H300L340 160H460L500 200H800"/></svg>
+<h2>Não encontra a peça?<br>Encomendamos para si.</h2>
+<p>Diga-nos o que precisa e respondemos no mesmo dia.</p>
+</section>
+
+<footer id="contacto"><span>Voltix · Samba, Luanda, Angola</span><span>vendas@voltix.ao · +244 900 000 000</span><span>© 2026 Voltix. Todos os direitos reservados.</span></footer>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Carrinho de compras" aria-hidden="true">
+<div class="dh"><h2 id="dt">Carrinho</h2><button id="close" aria-label="Fechar">×</button></div>
+<div id="view" style="display:flex;flex-direction:column;flex:1;min-height:0"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+var IMG="https://images.unsplash.com/photo-";
+var P=[
+["Placa Nano V3","Placas","1603732551658-5fabbafa84eb",18500],
+["Placa Pro Wi-Fi","Placas","1621136429581-bf0890d5ac22",32900],
+["Multímetro digital M1","Medição","1564942513760-da4dc8da3d47",24900],
+["Kit de 500 componentes","Componentes","1577962144759-8dec6b55c952",9800],
+["Kit de circuitos e módulos","Componentes","1555664424-778a1e5e1b48",14200],
+["Mini placa de sensores","Placas","1649959168260-2eb9702d7b69",16400],
+["Placa de prototipagem verde","Placas","1557855506-3619a44bab73",21500],
+["Pinça amperimétrica","Medição","1553873002-785d775854c9",38000]];
+function $(i){return document.getElementById(i)}
+function kz(n){return n.toLocaleString("pt-PT")+" Kz"}
+function src(p,w){return IMG+p[2]+"?auto=format&fit=crop&w="+w+"&q=80"}
+function fb(img){img.style.display="none";var s=img.nextElementSibling;if(s)s.style.display="block"}
+/* ---------- estado do carrinho ---------- */
+var cart={};
+try{cart=JSON.parse(localStorage.getItem("voltix-cart")||"{}")}catch(e){cart={}}
+function save(){try{localStorage.setItem("voltix-cart",JSON.stringify(cart))}catch(e){}}
+function total(){return Object.keys(cart).reduce(function(s,i){return s+P[i][3]*cart[i]},0)}
+function qty(){return Object.keys(cart).reduce(function(s,i){return s+cart[i]},0)}
+function badge(){var c=$("count");c.textContent=qty();c.classList.add("pop");setTimeout(function(){c.classList.remove("pop")},250)}
+var tt;function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2000)}
+function add(i){cart[i]=(cart[i]||0)+1;save();badge();toast(P[i][0]+" adicionado ao carrinho");if(open_)showCart()}
+function chg(i,d){cart[i]=(cart[i]||0)+d;if(cart[i]<=0)delete cart[i];save();badge();showCart()}
+/* ---------- gaveta ---------- */
+var open_=false,drawer=$("drawer"),ov=$("ov"),view=$("view");
+function openD(){open_=true;drawer.classList.add("on");ov.classList.add("on");drawer.setAttribute("aria-hidden","false");showCart()}
+function closeD(){open_=false;drawer.classList.remove("on");ov.classList.remove("on");drawer.setAttribute("aria-hidden","true")}
+$("open").onclick=openD;$("close").onclick=closeD;ov.onclick=closeD;
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&open_)closeD()});
+function el(h){var d=document.createElement("div");d.innerHTML=h;return d.firstChild}
+function showCart(){
+  $("dt").textContent="Carrinho";view.innerHTML="";
+  var ids=Object.keys(cart);
+  var body=document.createElement("div");body.className="db";
+  if(!ids.length){body.innerHTML="<div class=\"empty\">O seu carrinho está vazio.<br>Adicione produtos para continuar.</div>"}
+  ids.forEach(function(i){var p=P[i];
+    body.appendChild(el("<div class=\"it\"><img src=\""+src(p,200)+"\" alt=\"\" referrerpolicy=\"no-referrer\"><div><h4>"+p[0]+"</h4><small>"+kz(p[3])+"</small><div class=\"q\"><button data-d=\"-1\" data-i=\""+i+"\" aria-label=\"Menos\">−</button><span>"+cart[i]+"</span><button data-d=\"1\" data-i=\""+i+"\" aria-label=\"Mais\">+</button></div></div><div style=\"text-align:right\"><div>"+kz(p[3]*cart[i])+"</div><button class=\"rm\" data-r=\""+i+"\">Remover</button></div></div>"))});
+  body.onclick=function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.d)chg(b.dataset.i,+b.dataset.d);if(b.dataset.r){delete cart[b.dataset.r];save();badge();showCart()}};
+  var f=el("<div class=\"df\"><div class=\"tot\"><span>Total</span><span>"+kz(total())+"</span></div><button class=\"pri\" id=\"go\""+(ids.length?"":" disabled")+">Finalizar compra</button></div>");
+  view.appendChild(body);view.appendChild(f);
+  $("go").onclick=showForm;
+}
+function showForm(){
+  $("dt").textContent="Finalizar compra";
+  view.innerHTML="<form class=\"f\" id=\"fm\"><label>Nome completo<input name=\"n\" required autocomplete=\"name\"></label><label>Telefone<input name=\"t\" type=\"tel\" required autocomplete=\"tel\" placeholder=\"+244 9xx xxx xxx\"></label><label>Morada de entrega<input name=\"m\" required placeholder=\"Bairro, rua, Luanda\" autocomplete=\"street-address\"></label><label>Pagamento<select name=\"p\"><option>Multicaixa Express</option><option>Pagar na entrega</option><option>Transferência bancária</option></select></label><div class=\"sec2\">"+qty()+" artigo(s) · Total <b>"+kz(total())+"</b></div><button class=\"pri\" type=\"submit\">Confirmar pedido</button><button type=\"button\" class=\"rm\" id=\"bk\">Voltar ao carrinho</button></form>";
+  $("bk").onclick=showCart;
+  $("fm").onsubmit=function(e){e.preventDefault();var d=new FormData(e.target),n="VX-"+Date.now().toString().slice(-6),v=kz(total());
+    cart={};save();$("count").textContent=0;$("dt").textContent="Pedido confirmado";
+    view.innerHTML="<div class=\"ok\"><i>✓</i><h3 style=\"font-size:24px\">Obrigado, <span id=\"nm\"></span>!</h3><p style=\"color:var(--mut)\">Pedido <b>"+n+"</b> no valor de "+v+".<br>Vamos contactá-lo para confirmar a entrega.</p><button class=\"pri\" id=\"fim\" style=\"width:100%\">Continuar a comprar</button></div>";
+    $("nm").textContent=String(d.get("n")).split(" ")[0];$("fim").onclick=closeD};
+}
+/* ---------- produtos ---------- */
+var cats=["Todos"].concat(P.map(function(p){return p[1]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var grid=$("grid"),chips=$("chips"),obs=window.IntersectionObserver?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");obs.unobserve(e.target)}})},{threshold:.12}):null;
+function render(c){
+  grid.innerHTML=P.map(function(p,i){return c==="Todos"||p[1]===c?"<article class=\"card\" style=\"transition-delay:"+(i%4)*70+"ms\"><div class=\"tile\"><img src=\""+src(p,700)+"\" alt=\""+p[0]+"\" loading=\"lazy\" referrerpolicy=\"no-referrer\" onerror=\"fb(this)\"><svg viewBox=\"0 0 200 200\" role=\"img\" aria-label=\""+p[0]+"\"><use href=\"#s-"+p[1]+"\"/></svg></div><div class=\"info\"><small>"+p[1]+"</small><h3>"+p[0]+"</h3><div class=\"row\"><span>"+kz(p[3])+"</span><button class=\"buy\" data-i=\""+i+"\">Comprar</button></div></div></article>":""}).join("");
+  [].forEach.call(grid.children,function(c){obs?obs.observe(c):c.classList.add("in")});
+}
+cats.forEach(function(c,i){var b=document.createElement("button");b.textContent=c;b.setAttribute("aria-pressed",i==0);b.onclick=function(){[].forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",x===b)});render(c)};chips.appendChild(b)});
+render("Todos");
+grid.addEventListener("click",function(e){var b=e.target.closest(".buy");if(b)add(+b.dataset.i)});
+/* imagens seguem o rato */
+grid.addEventListener("mousemove",function(e){var t=e.target.closest(".tile");if(!t)return;var r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5,im=t.firstChild;im.style.transform="scale(1.08) translate("+(-x*28)+"px,"+(-y*28)+"px)"});
+grid.addEventListener("mouseout",function(e){var t=e.target.closest(".tile");if(t)t.firstChild.style.transform=""});
+/* slideshow */
+var S=[].slice.call(document.querySelectorAll(".slide")),D=$("dots"),k=0,timer;
+S.forEach(function(s,i){var im=s.querySelector("img");im.onerror=function(){im.style.display="none";s.querySelector(".fb").style.display="block"};var b=document.createElement("button");b.setAttribute("aria-label","Slide "+(i+1));b.innerHTML="<i></i>";b.onclick=function(){go(i)};D.appendChild(b)});
+function go(i){k=i;S.forEach(function(s,j){s.classList.toggle("on",j===i)});[].forEach.call(D.children,function(b,j){b.classList.remove("on");if(j===i){void b.offsetWidth;b.classList.add("on")}});clearTimeout(timer);timer=setTimeout(function(){go((k+1)%S.length)},5000)}
+go(0);$("count").textContent=qty();
+function chk(){[].forEach.call(document.images,function(im){if(im.complete&&im.naturalWidth===0&&im.style.display!=="none"){im.onerror&&im.onerror()}})}
+window.addEventListener("load",chk);setTimeout(chk,2500);setTimeout(chk,6000);
+</script>
+</body>
+</html>

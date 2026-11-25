@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jadoo — viagens com intenção. Descubra destinos, planeie a sua próxima viagem e parta com confiança." />
+  <title>Jadoo — Viajar muda a perspetiva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { paper: '#F9F9F6', ink: '#171717', muted: '#696969', line: '#E5E5DF', accent: '#E96B4B', sand: '#F0E9DC' },
+        fontFamily: { sans: ['Inter Tight', 'Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'], serif: ['DM Serif Display', 'Georgia', 'serif'] },
+        letterSpacing: { editorial: '-.045em' }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background:#F9F9F6; color:#171717; }
+    ::selection { background:#E96B4B; color:white; }
+    .nav-glass { background:rgba(249,249,246,.84); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+    .display { letter-spacing:-.055em; line-height:.92; }
+    .eyebrow { font:500 10px 'JetBrains Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+    .hairline { border-color:#E5E5DF; }
+    .link-arrow { transition:transform .2s cubic-bezier(.2,.8,.2,1); }
+    a:hover .link-arrow, button:hover .link-arrow { transform:translate(3px,-3px); }
+    .destination-image { transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+    .destination-card:hover .destination-image { transform:scale(1.045); }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .menu-panel { display:none; }
+    .menu-panel.open { display:block; }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; } .reveal {opacity:1;transform:none;} }
+  </style>
+</head>
+<body class="font-sans antialiased">
+  <!-- Navigation -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b hairline nav-glass">
+    <nav class="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 md:px-10 xl:px-16" aria-label="Navegação principal">
+      <a href="#inicio" class="text-[27px] font-extrabold tracking-[-.09em]">jad<span class="text-accent">oo</span><span class="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-accent align-baseline"></span></a>
+      <div class="hidden items-center gap-10 md:flex">
+        <a class="text-[13px] text-muted transition hover:text-ink" href="#destinos">Destinos</a>
+        <a class="text-[13px] text-muted transition hover:text-ink" href="#experiencia">Experiência</a>
+        <a class="text-[13px] text-muted transition hover:text-ink" href="#sobre">Sobre nós</a>
+      </div>
+      <div class="hidden items-center gap-7 md:flex">
+        <a href="#contacto" class="text-[13px] text-muted transition hover:text-ink">Contactos</a>
+        <a href="#destinos" class="group inline-flex items-center gap-3 border border-ink px-4 py-2.5 text-[12px] transition hover:bg-ink hover:text-white">Planear viagem <span class="link-arrow">↗</span></a>
+      </div>
+      <button id="menuButton" class="border border-line px-3 py-2 text-xs md:hidden" aria-expanded="false" aria-controls="mobileMenu">Menu <span class="ml-2">＋</span></button>
+    </nav>
+    <div id="mobileMenu" class="menu-panel border-t hairline bg-paper px-5 py-5 md:hidden">
+      <div class="flex flex-col gap-4 text-sm"><a href="#destinos">Destinos</a><a href="#experiencia">Experiência</a><a href="#sobre">Sobre nós</a><a href="#contacto">Contactos</a></div>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- Hero -->
+    <section class="mx-auto max-w-[1440px] px-5 pb-16 pt-36 md:px-10 md:pb-24 md:pt-44 xl:px-16">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end md:gap-6">
+        <div class="md:col-span-8">
+          <p class="eyebrow mb-7 flex items-center gap-3 text-accent"><span class="h-px w-8 bg-accent"></span> Viagens feitas à sua medida · Desde 2018</p>
+          <h1 class="display max-w-[900px] text-[clamp(3.8rem,9.2vw,9rem)] font-semibold">O mundo é<br><span class="font-serif font-normal italic">maior</span> do que<br>a sua rotina.</h1>
+        </div>
+        <div class="md:col-span-4 md:pb-2 md:pl-8">
+          <p class="max-w-sm text-[15px] leading-7 text-muted">Criamos viagens que começam muito antes da partida. Escolha o destino. Nós tratamos dos detalhes para que possa estar presente em cada momento.</p>
+          <a href="#destinos" class="mt-7 inline-flex items-center gap-4 border-b border-accent pb-2 text-sm font-semibold">Encontre a sua próxima viagem <span class="link-arrow text-accent">↗</span></a>
+        </div>
+      </div>
+      <div class="relative mt-12 overflow-hidden border hairline md:mt-16">
+        <div class="aspect-[16/9] min-h-[300px] w-full bg-sand">
+          <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1518521901256-c90d4db6f85c?auto=format&fit=crop&w=2200&q=85" alt="Paisagem montanhosa de Angola vista de cima" />
+        </div>
+        <div class="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-3 bg-gradient-to-t from-black/55 to-transparent px-5 pb-5 pt-16 text-white md:flex-row md:items-end md:px-8 md:pb-7">
+          <div><p class="eyebrow text-white/70">01 / O destino em destaque</p><p class="mt-2 font-serif text-3xl md:text-5xl">A beleza de ir mais longe.</p></div>
+          <p class="eyebrow text-white/80">Descobrir sem pressa · 2026</p>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-between text-[10px] text-muted"><span class="eyebrow">JADOO / TRAVEL STUDIO</span><span class="eyebrow">LUANDA · EM TODO O MUNDO</span></div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="border-y hairline">
+      <div class="mx-auto grid max-w-[1440px] grid-cols-2 px-5 md:grid-cols-4 md:px-10 xl:px-16">
+        <div class="border-r hairline py-7 pr-4 md:py-9"><p class="font-serif text-4xl tracking-tight md:text-5xl">38<span class="text-accent">+</span></p><p class="eyebrow mt-3 text-muted">Países explorados</p></div>
+        <div class="border-r-0 hairline py-7 pl-5 md:border-r md:px-7 md:py-9"><p class="font-serif text-4xl tracking-tight md:text-5xl">2.4k</p><p class="eyebrow mt-3 text-muted">Viajantes felizes</p></div>
+        <div class="border-r hairline py-7 pr-4 md:px-7 md:py-9"><p class="font-serif text-4xl tracking-tight md:text-5xl">96<span class="text-accent">%</span></p><p class="eyebrow mt-3 text-muted">Recomendam-nos</p></div>
+        <div class="py-7 pl-5 md:py-9 md:pl-7"><p class="font-serif text-4xl tracking-tight md:text-5xl">24/7</p><p class="eyebrow mt-3 text-muted">Apoio em viagem</p></div>
+      </div>
+    </section>
+
+    <!-- Destinations -->
+    <section id="destinos" class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-28 xl:px-16">
+      <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-7"><p class="eyebrow mb-5 text-accent">02 / Lugares que ficam</p><h2 class="display text-5xl font-semibold md:text-7xl">Escolha o seu<br>próximo <span class="font-serif font-normal italic">capítulo.</span></h2></div>
+        <p class="max-w-sm text-sm leading-7 text-muted md:col-span-4 md:col-start-9">De cidades que nunca dormem a praias onde o tempo abranda. Há um lugar à sua espera.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
+        <article class="destination-card group md:col-span-7">
+          <a href="#contacto" class="block">
+            <div class="relative aspect-[5/4] overflow-hidden bg-sand md:aspect-[1.35/1]"><img class="destination-image h-full w-full object-cover" src="https://images.unsplash.com/photo-1743172140481-5c7044dd23d6?auto=format&fit=crop&w=1400&q=85" alt="Panorama da cidade de Luanda, Angola"/><span class="absolute left-5 top-5 bg-paper px-3 py-2 eyebrow">01 / Cidade</span></div>
+            <div class="flex items-start justify-between border-b hairline py-4"><div><h3 class="text-2xl font-semibold tracking-editorial">Panorama de Luanda</h3><p class="mt-1 text-xs text-muted">Cultura, história e novos encontros</p></div><span class="link-arrow text-xl">↗</span></div>
+          </a>
+        </article>
+        <article class="destination-card group md:col-span-5 md:mt-24">
+          <a href="#contacto" class="block">
+            <div class="relative aspect-[5/4] overflow-hidden bg-sand"><img class="destination-image h-full w-full object-cover" src="https://images.unsplash.com/photo-1543163181-25b5600dabb9?auto=format&fit=crop&w=1200&q=85" alt="Barco à vela no mar, na costa de Angola"/><span class="absolute left-5 top-5 bg-paper px-3 py-2 eyebrow">02 / Costa</span></div>
+            <div class="flex items-start justify-between border-b hairline py-4"><div><h3 class="text-2xl font-semibold tracking-editorial">Costa de Angola</h3><p class="mt-1 text-xs text-muted">Luz atlântica e dias lentos</p></div><span class="link-arrow text-xl">↗</span></div>
+          </a>
+        </article>
+      </div>
+      <div class="mt-10 flex justify-end"><a href="#contacto" class="inline-flex items-center gap-5 border border-ink px-5 py-3 text-xs transition hover:bg-ink hover:text-white">Ver todos os destinos <span class="link-arrow">↗</span></a></div>
+    </section>
+
+    <!-- Experience Bento -->
+    <section id="experiencia" class="border-y hairline bg-[#F3F2ED]">
+      <div class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-28 xl:px-16">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <div class="md:col-span-5"><p class="eyebrow mb-5 text-accent">03 / A experiência Jadoo</p><h2 class="display text-5xl font-semibold md:text-7xl">Menos logística.<br><span class="font-serif font-normal italic">Mais viagem.</span></h2><p class="mt-7 max-w-sm text-sm leading-7 text-muted">Uma boa viagem não deve começar com uma lista interminável de tarefas. Ouvimos o que procura e desenhamos um plano claro, com espaço para o inesperado.</p></div>
+          <div class="grid grid-cols-1 gap-3 md:col-span-6 md:col-start-7 md:grid-cols-2">
+            <article class="border hairline bg-paper p-6 md:col-span-2 md:p-8"><div class="flex items-start justify-between"><span class="eyebrow text-muted">01 — Planeamento</span><span class="text-2xl">↗</span></div><h3 class="mt-12 text-2xl font-semibold tracking-editorial">Um roteiro com a sua medida.</h3><p class="mt-3 max-w-md text-sm leading-6 text-muted">Datas, alojamento e experiências escolhidos de acordo com o seu ritmo, orçamento e interesses.</p><div class="mt-8 flex gap-1"><span class="h-1 w-12 bg-accent"></span><span class="h-1 w-12 bg-line"></span><span class="h-1 w-12 bg-line"></span><span class="h-1 w-12 bg-line"></span></div></article>
+            <article class="border hairline bg-paper p-6 md:p-7"><span class="eyebrow text-muted">02 — Transparência</span><div class="mt-10 font-serif text-5xl">100<span class="text-accent">%</span></div><h3 class="mt-3 text-lg font-semibold">Clareza nos custos.</h3><p class="mt-2 text-xs leading-6 text-muted">Sabe o que está incluído antes de confirmar.</p></article>
+            <article class="border hairline bg-paper p-6 md:p-7"><span class="eyebrow text-muted">03 — Acompanhamento</span><div class="mt-10 font-serif text-5xl">24<span class="text-accent">/</span>7</div><h3 class="mt-3 text-lg font-semibold">Estamos por perto.</h3><p class="mt-2 text-xs leading-6 text-muted">Apoio antes, durante e depois da partida.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature / case -->
+    <section id="sobre" class="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-28 xl:px-16">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center">
+        <div class="md:col-span-6">
+          <div class="aspect-[4/5] overflow-hidden bg-sand"><img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1543161949-1f9193812ce8?auto=format&fit=crop&w=1300&q=85" alt="Paisagem de montanhas em Angola" /></div>
+          <p class="mt-3 flex justify-between eyebrow text-muted"><span>JADOO FIELD NOTES</span><span>45° 26' N / 12° 20' E</span></p>
+        </div>
+        <div class="md:col-span-5 md:col-start-8">
+          <p class="eyebrow mb-6 text-accent">04 / A nossa forma de viajar</p>
+          <h2 class="display text-5xl font-semibold md:text-7xl">Não vendemos<br>apenas <span class="font-serif font-normal italic">destinos.</span></h2>
+          <p class="mt-8 text-sm leading-7 text-muted">Acreditamos que viajar é ganhar perspetiva. Por isso, cada itinerário começa com uma conversa real: o que quer descobrir, como gosta de viajar e o que torna uma experiência inesquecível para si.</p>
+          <div class="mt-10 border-t hairline pt-5"><div class="flex justify-between py-3 text-sm"><span>Consultoria personalizada</span><span class="eyebrow text-muted">01</span></div><div class="flex justify-between border-t hairline py-3 text-sm"><span>Reservas e estadias</span><span class="eyebrow text-muted">02</span></div><div class="flex justify-between border-t hairline py-3 text-sm"><span>Experiências locais</span><span class="eyebrow text-muted">03</span></div></div>
+          <a href="#contacto" class="mt-8 inline-flex items-center gap-4 bg-accent px-5 py-4 text-xs font-semibold text-white transition hover:bg-ink">Vamos planear juntos <span class="link-arrow">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contacto" class="border-y hairline bg-sand">
+      <div class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-16 md:grid-cols-12 md:items-end md:px-10 md:py-24 xl:px-16">
+        <div class="md:col-span-8"><p class="eyebrow mb-5 text-accent">05 / A próxima história é sua</p><h2 class="display text-5xl font-semibold md:text-8xl">Para onde<br><span class="font-serif font-normal italic">vamos?</span></h2></div>
+        <div class="md:col-span-4 md:pb-2"><p class="mb-6 max-w-xs text-sm leading-7 text-muted">Conte-nos o que imagina. A primeira conversa é simples, sem compromisso e começa consigo.</p><a href="mailto:ola@jadoo.ao?subject=Quero%20planear%20uma%20viagem" class="group flex items-center justify-between border-b border-ink pb-4 text-sm font-semibold">ola@jadoo.ao <span class="link-arrow text-xl">↗</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto max-w-[1440px] px-5 pb-8 pt-12 md:px-10 md:pt-16 xl:px-16">
+    <div class="grid grid-cols-2 gap-10 border-b hairline pb-12 md:grid-cols-12">
+      <div class="col-span-2 md:col-span-5"><a href="#inicio" class="text-5xl font-extrabold tracking-[-.1em] md:text-7xl">jad<span class="text-accent">oo</span><span class="text-accent">.</span></a><p class="mt-5 max-w-xs text-xs leading-6 text-muted">Viajar com intenção. Descobrir com tempo. Regressar com histórias.</p></div>
+      <div class="md:col-span-2 md:col-start-7"><p class="eyebrow mb-5 text-muted">Explorar</p><div class="flex flex-col gap-3 text-xs"><a class="hover:text-accent" href="#destinos">Destinos</a><a class="hover:text-accent" href="#experiencia">Experiência</a><a class="hover:text-accent" href="#sobre">Sobre nós</a></div></div>
+      <div class="md:col-span-2"><p class="eyebrow mb-5 text-muted">Contactos</p><div class="flex flex-col gap-3 text-xs"><a class="hover:text-accent" href="mailto:ola@jadoo.ao">Email</a><a class="hover:text-accent" href="#contacto">Fale connosco</a><span class="text-muted">Luanda, Angola</span></div></div>
+      <div class="md:col-span-2"><p class="eyebrow mb-5 text-muted">Social</p><div class="flex flex-col gap-3 text-xs"><a class="hover:text-accent" href="#contacto">Instagram ↗</a><a class="hover:text-accent" href="#contacto">Facebook ↗</a></div></div>
+    </div>
+    <div class="flex flex-col justify-between gap-3 pt-5 text-[10px] text-muted md:flex-row"><span class="eyebrow">© <span id="year"></span> JADOO TRAVEL STUDIO</span><span class="eyebrow">FEITO PARA IR MAIS LONGE.</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuButton.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.innerHTML = isOpen ? 'Fechar <span class="ml-2">×</span>' : 'Menu <span class="ml-2">＋</span>';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.innerHTML = 'Menu <span class="ml-2">＋</span>';
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('section > div, article').forEach(el => {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
